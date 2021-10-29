@@ -40,6 +40,13 @@ async function run() {
             // console.log(result)
             res.send(result);
         })
+        app.get('/service/placeOrder/:id', async (req,res)=>{
+          const id = req.params.id;
+          console.log('get name',id)
+          const service = {_id : ObjectId(id)};
+          const result = await serviceCollection.findOne(service);
+          res.send(result)
+        })
     } finally {
     //   await client.close();
     }
