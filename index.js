@@ -23,6 +23,7 @@ async function run() {
       await client.connect();
       const database = client.db('tourist');
       const serviceCollection = database.collection('service');
+      const OrderCollection = database.collection('Order');
 
         // CREAT SERVICE API
         app.get('/services', async (req,res)=>{
@@ -46,7 +47,16 @@ async function run() {
           const service = {_id : ObjectId(id)};
           const result = await serviceCollection.findOne(service);
           res.send(result)
+        });
+
+        app.post('/order', async(req,res)=>{
+          const orderService = req.body;
+          console.log('hit the post')
+          const result = await OrderCollection.insertOne(orderService);
+          console.log(result);
+          res.json(result);
         })
+
     } finally {
     //   await client.close();
     }
