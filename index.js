@@ -61,6 +61,13 @@ async function run() {
           const cursor = OrderCollection.find({});
           const result = await cursor.toArray();
           res.send(result);
+        });
+
+        app.delete('/order/:id', async(req,res)=>{
+          const id = req.params.id;
+          const service = {_id : ObjectId(id)};
+          const result = await OrderCollection.deleteOne(service)
+          res.json(result)
         })
 
     } finally {
