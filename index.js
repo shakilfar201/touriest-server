@@ -33,6 +33,12 @@ async function run() {
             // console.log(result)
             res.send(result);
         });
+        app.post('/services', async (req,res)=>{
+            const addservice = req.body; 
+            const result = await serviceCollection.insertOne(addservice)
+            // console.log(result)
+            res.json(result);
+        });
         // CREATE SINGLE DETAIL API
         app.get('/services/:id', async (req,res)=>{
             const id = req.params.id;
@@ -57,7 +63,7 @@ async function run() {
           console.log(result);
           res.json(result);
         });
-        
+
         app.post('/information', async(req,res)=>{
           const information = req.body;
           console.log('hit the post')
