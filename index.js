@@ -33,6 +33,14 @@ async function run() {
             // console.log(result)
             res.send(result);
         });
+        // DELETE SERVICES
+        app.delete('/services/:id', async(req,res)=>{
+          const id = req.params.id;
+          const service = {_id : ObjectId(id)};
+          const result = await OrderCollection.deleteOne(service)
+          res.json(result)
+        })
+        // ADD SERVICE
         app.post('/services', async (req,res)=>{
             const addservice = req.body; 
             const result = await serviceCollection.insertOne(addservice)
